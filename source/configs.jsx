@@ -3,7 +3,12 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { browserHistory } from 'react-router';
 import thunk from 'redux-thunk';
 
+import { boards } from './reducers/boards';
+import { tasks } from './reducers/tasks';
+
 const myLocationsApp = combineReducers({
+    boards,
+    tasks,
     routing: routerReducer,
 });
 

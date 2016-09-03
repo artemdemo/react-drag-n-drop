@@ -1,0 +1,18 @@
+@bg-color: #eeeeee;
+
+.board {
+    flex-grow: 1;
+    border-radius: 3px;
+    margin-right: 1%;
+    padding: 8px 10px;
+    background-color: @bg-color;
+    border: 1px solid darken(@bg-color, 10%);
+
+    &:last-of-type {
+        margin-right: 0;
+    }
+}
+
+    .board__name {
+        font-weight: bold;
+    }
