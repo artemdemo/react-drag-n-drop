@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { DragField } from '../DragField/DragField';
+import { DragItem } from '../DragItem/DragItem';
 import Task from '../Task/Task';
 
 import './Board.less';
 
 class Board extends Component {
+    constructor(props) {
+        super(props);
+        this.dragStarted = () => {};
+    }
+
     render() {
         const { board, tasks } = this.props;
         const boardTasks = tasks.filter(task => task.boardId === board.id);
@@ -13,11 +20,15 @@ class Board extends Component {
         return (
             <div className='board'>
                 <div className='board__name'>{board.name}</div>
-                <div className='board__content'>
+                <DragField className='board__content'>
                     {boardTasks.map(task => (
-                        <Task task={task} key={`task-${task.id}`} />
+                        <DragItem className='task'
+                                  key={`task-${task.id}`}
+                                  dragStarted={this.dragStarted}>
+                            <Task task={task} />
+                        </DragItem>
                     ))}
-                </div>
+                </DragField>
             </div>
         );
     }
