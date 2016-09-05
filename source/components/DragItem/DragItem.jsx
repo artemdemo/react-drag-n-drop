@@ -78,8 +78,8 @@ export class DragItem extends Component {
         const renderPlaceholder = (position) => {
             if (this.state.renderPlaceholder === position) {
                 const placeholderClass = classnames({
-                    'drag-item_placeholder': true,
-                    [`drag-item_placeholder__${position}`]: true,
+                    'drag-item__placeholder': true,
+                    [`drag-item__placeholder_${position}`]: true,
                 });
                 return (
                     <div className={placeholderClass} />

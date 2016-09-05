@@ -1,6 +1,7 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+// const webpack = require('webpack');
 
 module.exports = {
     entry: {
@@ -63,6 +64,11 @@ module.exports = {
         new ExtractTextPlugin('./css/styles.css', {
             allChunks: true,
         }),
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         warnings: false,
+        //     },
+        // }),
     ],
     postcss: function() {
         return [
