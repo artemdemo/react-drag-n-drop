@@ -20,10 +20,12 @@ class Board extends Component {
         return (
             <div className='board'>
                 <div className='board__name'>{board.name}</div>
-                <DragItemsContainer className='board__content'>
+                <DragItemsContainer className='board__content'
+                                    container={board.id}>
                     {boardTasks.map(task => (
                         <DragItem className='task'
                                   key={`task-${task.id}`}
+                                  item={task.id}
                                   dragStarted={this.dragStarted}>
                             <Task task={task} />
                         </DragItem>

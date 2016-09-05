@@ -51,3 +51,7 @@ export class DragItemsContainer extends Component {
         );
     }
 }
+
+DragItemsContainer.PropTypes = {
+    container: React.PropTypes.any,
+};

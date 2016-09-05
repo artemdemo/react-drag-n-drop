@@ -112,4 +112,5 @@ export class DragItem extends Component {
 DragItem.propTypes = {
     dragStarted: React.PropTypes.func,
     dragStopped: React.PropTypes.func,
+    item: React.PropTypes.any,
 };
