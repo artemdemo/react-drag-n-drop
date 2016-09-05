@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import throttle from '../../utils/throttle';
 
 import './DragItem.less';
 
@@ -34,24 +35,28 @@ export class DragItem extends Component {
             }
         };
 
-        this.dragOver = (e) => {
-            e.stopPropagation();
+        const setNewPosition = throttle((position) => {
+            this.setState({
+                renderPlaceholder: position,
+            });
+
             clearTimeout(this.dropPlaceholderTimeoutId);
             this.dropPlaceholderTimeoutId = setTimeout(() => {
                 this.setState({
                     renderPlaceholder: false,
                 });
-            }, 70);
+            }, 100);
+        }, 50);
 
+        this.dragOver = (e) => {
+            e.stopPropagation();
             if (e.target.className.indexOf('board-task_placeholder') > -1) return;
 
             const relY = e.clientY - e.target.offsetTop;
             const height = e.target.offsetHeight / 2;
             const position = relY > height ? 'after' : 'before';
 
-            this.setState({
-                renderPlaceholder: position,
-            });
+            setNewPosition(position);
         };
 
         this.dragEnd = (e) => {
