@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import throttle from '../../utils/throttle';
 
-export class DragField extends Component {
+export class DragItemsContainer extends Component {
     constructor(props) {
         super(props);
 

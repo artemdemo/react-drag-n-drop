@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { DragField } from '../DragField/DragField';
+import { DragItemsContainer } from '../DragItemsContainer/DragItemsContainer';
 import { DragItem } from '../DragItem/DragItem';
 import Task from '../Task/Task';
 
@@ -20,7 +20,7 @@ class Board extends Component {
         return (
             <div className='board'>
                 <div className='board__name'>{board.name}</div>
-                <DragField className='board__content'>
+                <DragItemsContainer className='board__content'>
                     {boardTasks.map(task => (
                         <DragItem className='task'
                                   key={`task-${task.id}`}
@@ -28,7 +28,7 @@ class Board extends Component {
                             <Task task={task} />
                         </DragItem>
                     ))}
-                </DragField>
+                </DragItemsContainer>
             </div>
         );
     }
