@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import throttle from '../../utils/throttle';
+import throttle from './utils/throttle';
 
 export class DragItemsContainer extends Component {
     constructor(props) {

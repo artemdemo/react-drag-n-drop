@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { DragItemsContainer } from '../DragItemsContainer/DragItemsContainer';
-import { DragItem } from '../DragItem/DragItem';
+import { DragItemsContainer } from '../DragNDrop/DragItemsContainer';
+import { DragItem } from '../DragNDrop/DragItem';
 import Task from '../Task/Task';
 
 import './Board.less';

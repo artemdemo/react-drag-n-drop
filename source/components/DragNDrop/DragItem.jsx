@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import throttle from '../../utils/throttle';
+import throttle from './utils/throttle';
 
 import './DragItem.less';
 
