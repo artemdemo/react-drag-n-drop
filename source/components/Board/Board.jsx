@@ -5,6 +5,8 @@ import { DragItemsContainer } from '../DragNDrop/DragItemsContainer';
 import { DragItem } from '../DragNDrop/DragItem';
 import Task from '../Task/Task';
 
+import { updateTaskPosition } from '../../actions/tasks';
+
 import './Board.less';
 
 class Board extends Component {
@@ -13,8 +15,9 @@ class Board extends Component {
 
         this.dragStarted = () => {};
 
-        this.dragStopped = (event, itemData) => {
-            console.log(itemData);
+        this.dragStopped = (task, itemData) => {
+            const { updateTaskPosition } = this.props;
+            updateTaskPosition(task, itemData.container, itemData.position);
         };
     }
 
@@ -32,7 +35,7 @@ class Board extends Component {
                                   key={`task-${task.id}`}
                                   item={task.id}
                                   dragStarted={this.dragStarted}
-                                  dragStopped={this.dragStopped}>
+                                  dragStopped={(event, itemData) => this.dragStopped(task, itemData)}>
                             <Task task={task} />
                         </DragItem>
                     ))}
@@ -47,5 +50,7 @@ export default connect(
         return {
             tasks: state.tasks,
         };
+    }, {
+        updateTaskPosition,
     }
 )(Board);
