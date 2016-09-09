@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import throttle from './utils/throttle';
+import { setLandingContainer, setNearItem, setPosition } from './services/dragService';
 
 export class DragItemsContainer extends Component {
     constructor(props) {
@@ -24,7 +25,14 @@ export class DragItemsContainer extends Component {
                         renderPlaceholder: false,
                     });
                 }, 100);
+
+                // If board has no items then `nearItem` should be set to `undefined`
+                setNearItem();
+                // as well as `position` case it's not relevant in this case
+                setPosition();
             }
+            const { container } = this.props;
+            setLandingContainer(container);
         }, 50);
     }
 

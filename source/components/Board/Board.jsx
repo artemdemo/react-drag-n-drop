@@ -10,7 +10,12 @@ import './Board.less';
 class Board extends Component {
     constructor(props) {
         super(props);
+
         this.dragStarted = () => {};
+
+        this.dragStopped = (event, itemData) => {
+            console.log(itemData);
+        };
     }
 
     render() {
@@ -26,7 +31,8 @@ class Board extends Component {
                         <DragItem className='task'
                                   key={`task-${task.id}`}
                                   item={task.id}
-                                  dragStarted={this.dragStarted}>
+                                  dragStarted={this.dragStarted}
+                                  dragStopped={this.dragStopped}>
                             <Task task={task} />
                         </DragItem>
                     ))}

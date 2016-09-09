@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import throttle from './utils/throttle';
+import {
+    setDraggedItem, getDraggedItem,
+    setNearItem, getNearItem,
+    getLandingContainer,
+    setPosition, getPosition } from './services/dragService';
 
 import './DragItem.less';
 
@@ -28,17 +33,20 @@ export class DragItem extends Component {
                 });
             }, 16);
 
-            const { dragStarted } = this.props;
+            const { dragStarted, item } = this.props;
 
             if (dragStarted) {
                 dragStarted(e);
             }
+
+            setDraggedItem(item);
         };
 
         const setNewPosition = throttle((position) => {
             this.setState({
                 renderPlaceholder: position,
             });
+            setPosition(position);
 
             clearTimeout(this.dropPlaceholderTimeoutId);
             this.dropPlaceholderTimeoutId = setTimeout(() => {
@@ -49,12 +57,14 @@ export class DragItem extends Component {
         }, 50);
 
         this.dragOver = (e) => {
-            e.stopPropagation();
             if (e.target.className.indexOf('board-task_placeholder') > -1) return;
 
             const relY = e.clientY - e.target.offsetTop;
             const height = e.target.offsetHeight / 2;
             const position = relY > height ? 'after' : 'before';
+
+            const { item } = this.props;
+            setNearItem(item);
 
             setNewPosition(position);
         };
@@ -65,8 +75,14 @@ export class DragItem extends Component {
             });
 
             const { dragStopped } = this.props;
+
             if (dragStopped) {
-                dragStopped(e);
+                dragStopped(e, {
+                    item: getDraggedItem(),
+                    container: getLandingContainer(),
+                    nearItem: getNearItem(),
+                    position: getPosition(), // before, after
+                });
             }
         };
     }
