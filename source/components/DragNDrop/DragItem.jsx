@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import throttle from './utils/throttle';
+import { throttleLead } from './utils/throttle';
 import { nerve } from './utils/nerve';
 import {
     setDraggedItem, getDraggedItem,
@@ -43,7 +43,7 @@ export class DragItem extends Component {
             setDraggedItem(item);
         };
 
-        const setNewPosition = throttle((position) => {
+        const setNewPosition = throttleLead((position) => {
             this.setState({
                 renderPlaceholder: position,
             });
@@ -54,7 +54,7 @@ export class DragItem extends Component {
                 this.setState({
                     renderPlaceholder: false,
                 });
-            }, 100);
+            }, 60);
         }, 50);
 
         this.dragOver = (e) => {

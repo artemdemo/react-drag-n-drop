@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import throttle from './utils/throttle';
+import { throttleLead } from './utils/throttle';
 import { nerve } from './utils/nerve';
 import { setLandingContainer, setNearItem, setPosition } from './services/dragService';
 
@@ -13,7 +13,7 @@ export class DragItemsContainer extends Component {
             renderPlaceholder: false,
         };
 
-        this.dragOver = throttle(() => {
+        this.dragOver = throttleLead(() => {
             if (!this.hasDragItems) {
                 this.setState({
                     renderPlaceholder: true,
