@@ -17,7 +17,7 @@ class Board extends Component {
 
         this.dragStopped = (task, itemData) => {
             const { updateTaskPosition } = this.props;
-            updateTaskPosition(task, itemData.container, itemData.position);
+            updateTaskPosition(task, itemData.container, itemData.position, itemData.nearItem);
         };
     }
 

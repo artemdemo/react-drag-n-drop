@@ -34,10 +34,10 @@ function sortByPosition(taskA, taskB) {
 export function tasks(state = defaultTasks, action) {
     switch (action.type) {
         case tasksConst.UPDATE_TASK_POSITIONS_AFTER_DRAGGING:
-            const sortedTasks = state
-                .filter(task => task.board_id === action.boardId)
-                .sort(sortByPosition);
             const draggedTask = Object.assign({}, action.draggedTask, {boardId: action.boardId});
+            const sortedTasks = state
+                .filter(task => task.boardId === action.boardId && task.id !== draggedTask.id)
+                .sort(sortByPosition);
             let boardTasks = [];
 
             if (sortedTasks.length === 0) {
@@ -52,6 +52,8 @@ export function tasks(state = defaultTasks, action) {
                             boardTasks.push(sortedTasks[i]);
                             boardTasks.push(draggedTask);
                         }
+                    } else {
+                        boardTasks.push(sortedTasks[i]);
                     }
                 }
             }
@@ -61,7 +63,7 @@ export function tasks(state = defaultTasks, action) {
             }));
 
             return state
-                .filter(task => task.board_id !== action.boardId && task.id !== draggedTask.id)
+                .filter(task => task.boardId !== action.boardId && task.id !== draggedTask.id)
                 .concat(boardTasks);
         default:
             return state;
