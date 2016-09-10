@@ -48,17 +48,17 @@ export class DragItem extends Component {
                 renderPlaceholder: position,
             });
             setPosition(position);
+        }, 50);
 
+        this.dragOver = (e) => {
             clearTimeout(this.dropPlaceholderTimeoutId);
             this.dropPlaceholderTimeoutId = setTimeout(() => {
                 this.setState({
                     renderPlaceholder: false,
                 });
             }, 60);
-        }, 50);
 
-        this.dragOver = (e) => {
-            if (e.target.className.indexOf('board-task_placeholder') > -1) return;
+            if (e.target.className.indexOf('drag-item__placeholder') > -1) return;
 
             const relY = e.clientY - e.target.offsetTop;
             const height = e.target.offsetHeight / 2;
