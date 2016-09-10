@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import throttle from './utils/throttle';
+import { nerve } from './utils/nerve';
 import {
     setDraggedItem, getDraggedItem,
     setNearItem, getNearItem,
@@ -84,7 +85,30 @@ export class DragItem extends Component {
                     position: getPosition(), // before, after
                 });
             }
+
+            nerve.send({
+                route: 'item/drag-end',
+            });
         };
+    }
+
+    componentDidMount() {
+        this.nerveId = nerve.on({
+            route: 'item/drag-end',
+            callback: () => {
+                this.setState({
+                    renderPlaceholder: false,
+                });
+                clearTimeout(this.dropPlaceholderTimeoutId);
+            },
+        });
+    }
+
+    componentWillUnmount() {
+        nerve.off({
+            route: 'item/drag-end',
+            id: this.nerveId,
+        });
     }
 
     render() {

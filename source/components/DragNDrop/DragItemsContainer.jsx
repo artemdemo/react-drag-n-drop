@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import throttle from './utils/throttle';
+import { nerve } from './utils/nerve';
 import { setLandingContainer, setNearItem, setPosition } from './services/dragService';
 
 export class DragItemsContainer extends Component {
@@ -12,15 +13,13 @@ export class DragItemsContainer extends Component {
             renderPlaceholder: false,
         };
 
-        let removePlaceholderTimeoutId = null;
-
         this.dragOver = throttle(() => {
             if (!this.hasDragItems) {
                 this.setState({
                     renderPlaceholder: true,
                 });
-                clearTimeout(removePlaceholderTimeoutId);
-                removePlaceholderTimeoutId = setTimeout(() => {
+                clearTimeout(this.removePlaceholderTimeoutId);
+                this.removePlaceholderTimeoutId = setTimeout(() => {
                     this.setState({
                         renderPlaceholder: false,
                     });
@@ -34,6 +33,25 @@ export class DragItemsContainer extends Component {
             const { container } = this.props;
             setLandingContainer(container);
         }, 50);
+    }
+
+    componentDidMount() {
+        this.nerveId = nerve.on({
+            route: 'item/drag-end',
+            callback: () => {
+                this.setState({
+                    renderPlaceholder: false,
+                });
+                clearTimeout(this.removePlaceholderTimeoutId);
+            },
+        });
+    }
+
+    componentWillUnmount() {
+        nerve.off({
+            route: 'item/drag-end',
+            id: this.nerveId,
+        });
     }
 
     render() {
