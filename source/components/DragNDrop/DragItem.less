@@ -3,6 +3,16 @@
     padding: 20px 0;
     position: relative;
     margin-bottom: 6px;
+
+    &:before, &:after {
+        display: block;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        bottom: 0;
+        background-color: #ffffbd;
+        border: 1px solid #eaea74;
+    }
 }
 
     .drag-item__placeholder_before {
@@ -10,13 +20,6 @@
 
         &:before {
             content: '';
-            display: block;
-            position: absolute;
-            width: 100%;
-            top: 0;
-            bottom: 6px;
-            background-color: #ffffbd;
-            border: 1px solid #eaea74;
         }
     }
 
@@ -25,13 +28,6 @@
 
         &:after {
             content: '';
-            display: block;
-            position: absolute;
-            width: 100%;
-            top: 0;
-            bottom: 0;
-            background-color: #ffffbd;
-            border: 1px solid #eaea74;
         }
     }
 
