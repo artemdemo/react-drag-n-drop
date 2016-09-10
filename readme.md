@@ -43,7 +43,14 @@ Properties:
 * `className`
 * `item` - data about dragged item (for example, task that will dragged)
 * `dragStarted` - event, that will fire when dragging started
-* `dragStopped` - event, that will fire when dragging stopped
+* `dragStopped` - event, that will fire when dragging stopped.
+    Has 2 arguments:
+    * `event` - original event
+    * `itemData` - data about dragged task:
+        * `item` - dragged item
+        * `container` - container that will receive item
+        * `nearItem` - near which item the dragged one should be placed
+        * `position` - position `before` or `after` of `nearItem`
 
 `<DragItem>` should be always inside of `<DragItemsContainer>`. In addition `<DragItemsContainer>` shouldn't hold any other components.
 
