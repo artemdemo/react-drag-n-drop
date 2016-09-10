@@ -14,7 +14,7 @@ const guid = () => {
  * @param routeData {object}
  * @param routeData.route {string}
  * @param routeData.callback {function}
- * @return {string}
+ * @return {string} - id of the event
  */
 const on = (routeData) => {
     let currentRoute = defaultRoute;
@@ -39,7 +39,7 @@ const on = (routeData) => {
  * Removing listeners from the route
  * @param routeData {object}
  * @param routeData.route {string}
- * @param routeData.id {string}
+ * @param routeData.id {string} - if exists will be removed callback only with this id
  */
 const off = (routeData) => {
     if (routes[routeData.route]) {
@@ -65,7 +65,8 @@ const off = (routeData) => {
  * Send data to the route
  * @param sendData {object}
  * @param sendData.route {string}
- * @param sendData.id {string}
+ * @param sendData.id {string} - if exists will be called callback with this id,
+ *                               otherwise will call all callbacks in route
  * @param sendData.data {*}
  */
 const send = (sendData) => {
