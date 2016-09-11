@@ -2,7 +2,7 @@
 
 Drag and drop solution for react in different model environments
 
-![alt tag](react-dnd.png)
+![alt tag](react-drag-n-drop-animation.gif)
 
 ## Getting started
 
